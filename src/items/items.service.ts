@@ -1,14 +1,15 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateItemDto } from './dto/create-item.dto';
 import { UpdateItemDto } from './dto/update-item.dto';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Item } from './entities/item.entity';
-import { Repository } from 'typeorm';
+import { InjectEntityManager, InjectRepository } from '@nestjs/typeorm';
+import { Item, ItemStatus } from './entities/item.entity';
+import { EntityManager, In, Repository } from 'typeorm';
 
 @Injectable()
 export class ItemsService {
   constructor(
     @InjectRepository(Item) private itemRepository: Repository<Item>,
+    @InjectEntityManager() private readonly entityManager: EntityManager,
   ) {}
 
   create(createItemDto: CreateItemDto) {
@@ -37,5 +38,26 @@ export class ItemsService {
     }
 
     return this.itemRepository.delete({ id });
+  }
+
+  async approve(id: number) {
+    // id should not empty
+    if (!id) {
+      throw new NotFoundException(`id should not empty`);
+    }
+
+    // item should found
+    const item = await this.itemRepository.findOneBy({ id });
+    if (!item) {
+      throw new NotFoundException(`not found: id={}`);
+    }
+
+    // prepare items
+    // const approveItem = {...item, status: ItemStatus.APPROVED}
+    // return await this.itemRepository.save(approveItem)
+
+    item.status = ItemStatus.APPROVED;
+
+    return await this.itemRepository.save(item);
   }
 }

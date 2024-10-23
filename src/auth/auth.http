@@ -1,0 +1,24 @@
+### auth login
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "username": "A4",
+    "password": "1234"
+}
+### auth login - user not found
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "username": "A0",
+    "password": "1234"
+}
+
+### auth login - wrong password
+POST http://localhost:3000/auth/login
+
+{
+    "username": "A3",
+    "password": "0000"
+}
