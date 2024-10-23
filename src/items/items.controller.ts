@@ -26,7 +26,7 @@ export class ItemsController {
   create(@Body() createItemDto: CreateItemDto) {
     return this.itemsService.create(createItemDto);
   }
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Get()
   findAll() {
     return this.itemsService.findAll();
@@ -51,5 +51,12 @@ export class ItemsController {
   @Patch(':id/approve')
   approve(@Param('id', ParseIntPipe) id: number) {
     return this.itemsService.approve(id);
+  }
+
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles([Role.ADMIN, Role.MANAGER])
+  @Patch(':id/reject')
+  reject(@Param('id', ParseIntPipe) id: number) {
+    return this.itemsService.reject(id);
   }
 }
