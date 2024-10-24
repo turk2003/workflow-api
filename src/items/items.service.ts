@@ -52,10 +52,6 @@ export class ItemsService {
       throw new NotFoundException(`not found: id={}`);
     }
 
-    // prepare items
-    // const approveItem = {...item, status: ItemStatus.APPROVED}
-    // return await this.itemRepository.save(approveItem)
-
     item.status = ItemStatus.APPROVED;
 
     return await this.itemRepository.save(item);

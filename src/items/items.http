@@ -4,7 +4,7 @@ POST http://localhost:3000/items
 Content-Type: application/json
 
 {
-    "title": "Mouse",
+    "title": "poad",
     "amount": 10,
     "quantity" : 10
 }
