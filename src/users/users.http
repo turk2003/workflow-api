@@ -4,7 +4,7 @@ POST http://localhost:3000/users
 Content-Type: application/json
 
 {
-    "username": "A5",
+    "username": "user01",
     "password": "1234",
     "role": "USER"
 }
@@ -16,7 +16,7 @@ POST http://localhost:3000/users
 Content-Type: application/json
 
 {
-    "username": "Admin01",
+    "username": "admin01",
     "password": "1234",
     "role": "ADMIN"
 }
@@ -28,7 +28,22 @@ POST http://localhost:3000/users
 Content-Type: application/json
 
 {
-    "username": "m1001",
+    "username": "manager01",
     "password": "changeit",
     "role": "MANAGER"
 }
+### find all
+GET http://localhost:3000/users
+
+### find one
+GET http://localhost:3000/users/10
+### update
+PATCH http://localhost:3000/users/2
+Content-Type: application/json
+
+{
+    "title": "Mouse wireless"
+   
+}
+### delete
+DELETE http://localhost:3000/users/2

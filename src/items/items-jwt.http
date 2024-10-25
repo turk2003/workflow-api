@@ -6,14 +6,23 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-    "username": "Admin01",
+    "username": "admin01",
     "password": "1234"
 }
 
 ###
 @authToken = {{login.response.body.access_token}}
 
+### create
+POST http://localhost:3000/items
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
 
+{
+    "title": "a",
+    "amount": 10,
+    "quantity" : 10
+}
 ### find all
 GET http://localhost:3000/items
 Authorization: Bearer {{authToken}}
